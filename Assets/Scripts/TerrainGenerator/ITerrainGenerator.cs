@@ -4,7 +4,7 @@ using UnityEngine;
 
 
 namespace terrainGenerator{
-	
+	//TODO: Por GetSize() pra alimentar o MyTerrain quando o Size deixar de ser uma propriedade.
 	public interface ITerrainGenerator {
 		/// <summary>
         /// Os herdeiros devem fornecer as altitudes do terreno aqui.
@@ -12,7 +12,7 @@ namespace terrainGenerator{
         /// <returns>The terrain height.</returns>
         /// <param name="width">Width.</param>
         /// <param name="scale">Scale.</param>
-		float[,] GetTerrainHeight(int width, float scale);
+		float[,] GetTerrainHeight(int width);
 
         
         /// <summary>
