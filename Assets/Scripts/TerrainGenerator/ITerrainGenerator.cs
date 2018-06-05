@@ -13,6 +13,8 @@ namespace terrainGenerator{
         /// <param name="width">Width.</param>
         /// <param name="scale">Scale.</param>
 		float[,] GetTerrainHeight(int width, float scale);
+
+        
         /// <summary>
         /// O gradiente do terreno deve ser fornecido aqui, baseado na altitude.
 		/// Como a altitude é uma função de duas variáveis H(x,z) sua derivada é
