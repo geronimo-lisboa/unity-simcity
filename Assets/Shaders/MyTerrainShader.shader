@@ -3,6 +3,7 @@
 	Properties
 	{
 		_MainTex ("Texture", 2D) = "white" {}
+		_SeaLevel("Sea Level", float) = 0.0
 	}
 	SubShader
 	{
@@ -25,7 +26,7 @@
 			#pragma multi_compile_fwdbase nolightmap nodirlightmap nodynlightmap novertexlight
 			// shadow helper functions and macros
 			#include "AutoLight.cginc"
-
+			uniform float _SeaLevel;
 			struct appdata
 			{
 				float4 vertex : POSITION;
@@ -67,6 +68,30 @@
             //TODO: Fazer a escolha da cor de acordo com a inclinação[Pedreira;Grama]
             //TODO: Escolha da cor de acordo com a altitude[Submarino;Praia;Emerso]
 
+			fixed4 evaluateColorByInclination(float3 fragNormal) {
+				float3 upVector = float3(0, 1, 0);
+				half angle = dot(upVector, fragNormal);
+				fixed4 basePedreiraColor = fixed4(0.65, 0.63, 0.63, 1.0);
+				fixed4 baseGramaColor = fixed4(0.2, 0.35, 0.05, 1.0);
+
+				fixed4 result = angle * baseGramaColor + (1 - angle) * basePedreiraColor;
+				return result;
+			}
+			fixed4 evaluateColorByHeight(fixed4 color, float3 vertex) {
+				if (vertex.y < _SeaLevel - 1.0) {//Submerso
+					color.b = 1.0;
+					color.rgb = normalize(color.rgb);
+				}
+				else if (vertex.y < _SeaLevel + 1.0)//areia
+				{
+					color.rgb = float3(0.95, 1.0, 0.6);
+				}
+				else {//Mantém como está
+					  //...
+				}
+				return color;
+			}
+
 			//De acordo com o angulo entre a normal do fragmento e a normal vertical [0,1,0] eu determinarei
             //se é pra ser pedreira ou não.
             //De acordo com a altidude do fragmento, eu determinarei se é acima ou abaixo do mar e o tom de
@@ -74,7 +99,7 @@
 			fixed4 frag (v2f i) : SV_Target
 			{
 				///2) Shader pra iluminação
-				fixed4 color = tex2D(_MainTex, i.uv);
+				fixed4 color = evaluateColorByHeight(evaluateColorByInclination(i.worldNormal), i.pos);
 				// compute shadow attenuation (1.0 = fully lit, 0.0 = fully shadowed)
 				fixed shadow = SHADOW_ATTENUATION(i);
 				// darken light's illumination with shadow, keep ambient intact
