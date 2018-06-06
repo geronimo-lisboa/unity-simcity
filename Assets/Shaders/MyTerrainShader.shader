@@ -6,7 +6,7 @@
 	}
 	SubShader
 	{
-		Tags { "RenderType"="Opaque" }
+		Tags { "RenderType"="Opaque" "LightMode" = "ForwardBase" }
 		LOD 100
 
 		Pass
@@ -18,6 +18,7 @@
 			#pragma multi_compile_fog
 			
 			#include "UnityCG.cginc"
+			#include "UnityLightingCommon.cginc" 
 
 			struct appdata
 			{
@@ -29,6 +30,7 @@
 			struct v2f
 			{
 				float2 uv : TEXCOORD0;
+				fixed4 diff : COLOR0; //Diffuse lightning color
 				UNITY_FOG_COORDS(1)
 				float4 vertex : SV_POSITION;
                 float3 worldNormal : TEXCOORD1;
@@ -40,16 +42,19 @@
 			v2f vert (appdata v)
 			{
 				v2f o;
-				o.vertex = UnityObjectToClipPos(v.vertex);
-				o.uv = TRANSFORM_TEX(v.uv, _MainTex);
-                o.worldNormal = UnityObjectToWorldNormal(v.normal);
+				o.vertex = UnityObjectToClipPos(v.vertex);//Transforma do espaço de modelo pro espaço de clip
+				o.uv = TRANSFORM_TEX(v.uv, _MainTex);//a posição da textura
+                o.worldNormal = UnityObjectToWorldNormal(v.normal);//A normal do vertice no espaço global
 				UNITY_TRANSFER_FOG(o,o.vertex);
+				//calculo do brilho
+				half nl = max(0, dot(o.worldNormal, _WorldSpaceLightPos0.xyz));
+				o.diff = nl * _LightColor0;
 				return o;
 			}
 
             //Na situação atual ainda não tem nada.
             //TODO: Fazer a escolha da cor de acordo com a inclinação[Pedreira;Grama]
-            //TODO: Iluminação
+            //TODO: Iluminação (fazendo)
             //TODO: Sombras
             //TODO: Escolha da cor de acordo com a altitude[Submarino;Praia;Emerso]
 
@@ -59,10 +64,14 @@
             //verde.
 			fixed4 frag (v2f i) : SV_Target
 			{
+				///2) Shader pra iluminação
+				fixed4 color = tex2D(_MainTex, i.uv);
+				color *= i.diff;
+				return color;
 				///1) Shader que usa a normal pra fazer a cor.
-				fixed4 c = 0;
+				/*fixed4 c = 0;
 				c.rgb = i.worldNormal * 0.5 + 0.5;
-				return c;
+				return c;*/
 
 				///Shader original
                 /*float3 verticalNormal = float3(0,1,0);
