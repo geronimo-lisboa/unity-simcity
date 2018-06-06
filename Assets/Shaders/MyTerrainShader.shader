@@ -59,13 +59,19 @@
             //verde.
 			fixed4 frag (v2f i) : SV_Target
 			{
-                float3 verticalNormal = float3(0,1,0);
-                float inclination = verticalNormal, i.worldNormal;
+				///1) Shader que usa a normal pra fazer a cor.
+				fixed4 c = 0;
+				c.rgb = i.worldNormal * 0.5 + 0.5;
+				return c;
+
+				///Shader original
+                /*float3 verticalNormal = float3(0,1,0);
+                float inclination = dot(verticalNormal, i.worldNormal);
 				// sample the texture
 				fixed4 col = fixed4(0, inclination, 0,1);//tex2D(_MainTex, i.uv);
 				// apply fog
 				UNITY_APPLY_FOG(i.fogCoord, col);
-				return col;
+				return col;*/
 			}
 			ENDCG
 		}
