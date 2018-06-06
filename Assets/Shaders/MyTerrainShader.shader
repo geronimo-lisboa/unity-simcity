@@ -19,6 +19,12 @@
 			
 			#include "UnityCG.cginc"
 			#include "UnityLightingCommon.cginc" 
+			#include "Lighting.cginc"
+			// compile shader into multiple variants, with and without shadows
+			// (we don't care about any lightmaps yet, so skip these variants)
+			#pragma multi_compile_fwdbase nolightmap nodirlightmap nodynlightmap novertexlight
+			// shadow helper functions and macros
+			#include "AutoLight.cginc"
 
 			struct appdata
 			{
@@ -30,10 +36,12 @@
 			struct v2f
 			{
 				float2 uv : TEXCOORD0;
-				fixed4 diff : COLOR0; //Diffuse lightning color
+				fixed3 diff : COLOR0; //Diffuse lightning color
+				fixed3 ambient : COLOR1;
 				UNITY_FOG_COORDS(1)
-				float4 vertex : SV_POSITION;
-                float3 worldNormal : TEXCOORD1;
+				float4 pos : SV_POSITION;
+                float3 worldNormal : NORMAL;
+				SHADOW_COORDS(1) // put shadows data into TEXCOORD1
 			};
 
 			sampler2D _MainTex;
@@ -42,20 +50,21 @@
 			v2f vert (appdata v)
 			{
 				v2f o;
-				o.vertex = UnityObjectToClipPos(v.vertex);//Transforma do espaço de modelo pro espaço de clip
+				o.pos = UnityObjectToClipPos(v.vertex);//Transforma do espaço de modelo pro espaço de clip
 				o.uv = TRANSFORM_TEX(v.uv, _MainTex);//a posição da textura
                 o.worldNormal = UnityObjectToWorldNormal(v.normal);//A normal do vertice no espaço global
-				UNITY_TRANSFER_FOG(o,o.vertex);
+				UNITY_TRANSFER_FOG(o,o.pos);
 				//calculo do brilho
 				half nl = max(0, dot(o.worldNormal, _WorldSpaceLightPos0.xyz));
-				o.diff = nl * _LightColor0;
+				o.diff = nl * _LightColor0.rgb;
+				o.ambient = ShadeSH9(half4(o.worldNormal, 1));
+				// compute shadows data
+				TRANSFER_SHADOW(o)
 				return o;
 			}
 
             //Na situação atual ainda não tem nada.
             //TODO: Fazer a escolha da cor de acordo com a inclinação[Pedreira;Grama]
-            //TODO: Iluminação (fazendo)
-            //TODO: Sombras
             //TODO: Escolha da cor de acordo com a altitude[Submarino;Praia;Emerso]
 
 			//De acordo com o angulo entre a normal do fragmento e a normal vertical [0,1,0] eu determinarei
@@ -66,23 +75,18 @@
 			{
 				///2) Shader pra iluminação
 				fixed4 color = tex2D(_MainTex, i.uv);
-				color *= i.diff;
-				return color;
-				///1) Shader que usa a normal pra fazer a cor.
-				/*fixed4 c = 0;
-				c.rgb = i.worldNormal * 0.5 + 0.5;
-				return c;*/
+				// compute shadow attenuation (1.0 = fully lit, 0.0 = fully shadowed)
+				fixed shadow = SHADOW_ATTENUATION(i);
+				// darken light's illumination with shadow, keep ambient intact
+				fixed3 lighting = i.diff * shadow + i.ambient*0.5 ;
 
-				///Shader original
-                /*float3 verticalNormal = float3(0,1,0);
-                float inclination = dot(verticalNormal, i.worldNormal);
-				// sample the texture
-				fixed4 col = fixed4(0, inclination, 0,1);//tex2D(_MainTex, i.uv);
-				// apply fog
-				UNITY_APPLY_FOG(i.fogCoord, col);
-				return col;*/
+				color.rgb *= lighting;
+
+				return color;
 			}
 			ENDCG
 		}
+		// pull in shadow caster from VertexLit built-in shader
+		UsePass "Legacy Shaders/VertexLit/SHADOWCASTER"
 	}
 }

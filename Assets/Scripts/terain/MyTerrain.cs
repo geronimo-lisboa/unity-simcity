@@ -133,7 +133,7 @@ public class MyTerrain : MonoBehaviour {
             }
         }
         mesh.triangles = triangles;
-        mesh.RecalculateNormals();
+       // mesh.RecalculateNormals();
     }
 
     private void UpdateChangeTesters()
