@@ -11,6 +11,8 @@ public class MyTerrain : MonoBehaviour {
     //alteração nos dados qdo estiver rodando no editor
     private int currentSize = 0;
     private float currentHeightMultiplier = 0;
+    private float currentSeaLevel = 0;
+    private float currentBeachWidth = 0;
      /// <summary>
     /// O tamanho do lado, em quadradinhos
     /// </summary>
@@ -28,6 +30,12 @@ public class MyTerrain : MonoBehaviour {
     /// O heightmap
     /// </summary>
     public Texture2D Heightmap;
+    [Range(0.0f, 10f)]
+    public float SeaLevel;
+    [Range(0.2f, 2.0f)]
+    public float BeachWidth;
+
+    public GameObject SeaPlane;
 
     private Mesh mesh;
     private Vector3[] vertices;
@@ -47,22 +55,50 @@ public class MyTerrain : MonoBehaviour {
     }
     // Update is called once per frame
     void Update () {
-		if(RunningOnEditorTest.IsRunningOnEditor() && HasChangedSize())
+		if(RunningOnEditorTest.IsRunningOnEditor() && HasChangedData())
         {
             Generate();
             generator = new HeightMapTerrainGenerator(Heightmap);//new RandomTerrainGenerator(scale);            
             float[,] heightData = generator.GetTerrainHeight((int)Mathf.Sqrt(GetComponent<MeshFilter>().sharedMesh.vertices.Length));
             SetTerrainHeight(heightData);
+            UpdateShaderData();
             UpdateChangeTesters();
+            SetSeaPlane();
         }
         if(!RunningOnEditorTest.IsRunningOnEditor())
         {
             Generate();
             generator = new HeightMapTerrainGenerator(Heightmap);
-            float[,] heightData = generator.GetTerrainHeight(Size);
+            float[,] heightData = generator.GetTerrainHeight(Size);            
             SetTerrainHeight(heightData);
+            UpdateShaderData();
             UpdateChangeTesters();
+            SetSeaPlane();
         }
+    }
+
+    private void SetSeaPlane()
+    {
+        Vector3 t = new Vector3(0, SeaLevel - BeachWidth/2, 0);
+        SeaPlane.transform.position = t;
+        
+        SeaPlane.transform.localScale = new Vector3(1000, 1000, 1000);
+        
+    }
+
+    private void UpdateShaderData()
+    {
+        if (!RunningOnEditorTest.IsRunningOnEditor())
+        {
+            GetComponent<Renderer>().sharedMaterial.SetFloat("_SeaLevel", SeaLevel);
+            GetComponent<Renderer>().sharedMaterial.SetFloat("_BeachWidth", BeachWidth);
+        }
+        else
+        {
+            GetComponent<Renderer>().material.SetFloat("_SeaLevel", SeaLevel);
+            GetComponent<Renderer>().material.SetFloat("_BeachWidth", BeachWidth);
+        }
+            
     }
 
     private void SetTerrainHeight(float[,] height)
@@ -140,14 +176,18 @@ public class MyTerrain : MonoBehaviour {
     {
         currentHeightMultiplier = HeightMultiplier;
         currentSize = Size;
- 
+        currentSeaLevel = SeaLevel;
+        currentBeachWidth = BeachWidth;
     }
     /// <summary>
     /// Retorna true se houve mudança no tamanho da malha, false caso contrário.
     /// </summary>
     /// <returns></returns>
-    private bool HasChangedSize()
+    private bool HasChangedData()
     {
-        return (currentHeightMultiplier != HeightMultiplier || currentSize!= Size );
+        return (currentHeightMultiplier != HeightMultiplier ||
+            currentSize!= Size ||
+            currentSeaLevel != SeaLevel ||
+            currentBeachWidth != BeachWidth);
     }
 }
