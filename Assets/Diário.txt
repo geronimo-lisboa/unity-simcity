@@ -1,0 +1,10 @@
+06/06/2018
+Concluí o processo de igualar a versão unity com a versão android. O mar, as pedreiras e a praia funcionam.
+As proximas coisas a fazer são criar uma compilação android pra ver como está, se está tudo funcionando bem 
+no android e fazer uma ferramenta de edição de terreno.
+
+Ferramenta de edição de terreno:
+O usuário poderá elevar/diminuir os níveis do terreno como se fosse uma ferramenta de pintura. Ele escolhe
+qual ferramenta (aumentar/diminuir) e a área que a ferramenta cobrirá. Então a mudança é aplicada ao terreno.
+O terreno editado dessa forma poderá ser salvo. Terrenos salvos podem vir a ser carregados pelo usuário. Cada
+terreno terá um nome e uma thumb pra ajudar a identificação pro usuário.
