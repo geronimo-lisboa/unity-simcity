@@ -64,6 +64,7 @@ public class MyTerrain : MonoBehaviour {
             UpdateShaderData();
             UpdateChangeTesters();
             SetSeaPlane();
+            GetComponent<MeshCollider>().sharedMesh = GetComponent<MeshFilter>().sharedMesh;
         }
         if(!RunningOnEditorTest.IsRunningOnEditor())
         {
@@ -74,6 +75,7 @@ public class MyTerrain : MonoBehaviour {
             UpdateShaderData();
             UpdateChangeTesters();
             SetSeaPlane();
+            GetComponent<MeshCollider>().sharedMesh = GetComponent<MeshFilter>().mesh;
         }
     }
 
