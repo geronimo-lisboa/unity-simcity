@@ -5,6 +5,7 @@ using UnityEngine.Assertions;
 
 public class MouseClick : MonoBehaviour {
     public Camera SceneCamera;
+    public GameObject TestCursor;
     private void OnMouseDown()
     {
         Debug.Assert(SceneCamera != null, "Camera não pode ser null");
@@ -15,6 +16,7 @@ public class MouseClick : MonoBehaviour {
             RaycastHit hit;
             if(GetComponent<Collider>().Raycast(mouseRay,out hit, Mathf.Infinity))
             {
+                TestCursor.transform.position = hit.point;
                 Debug.Log(hit);
             }
             else
