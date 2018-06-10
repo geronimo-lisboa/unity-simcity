@@ -100,3 +100,4 @@ MonoBehaviour:
   Heightmap: {fileID: 2800000, guid: 1584e341dd9dca64698ada206482c140, type: 3}
   SeaLevel: 3.03
   BeachWidth: 0.2
+  SeaPlane: {fileID: 0}

@@ -1,13 +1,27 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 public class MouseClick : MonoBehaviour {
+    public Camera SceneCamera;
     private void OnMouseDown()
     {
+        Debug.Assert(SceneCamera != null, "Camera não pode ser null");
         if (Input.GetMouseButton(0))
         {
-            Debug.Log(gameObject.name);
+            Vector3 mousePosInScreenCoordinate = Input.mousePosition;
+            Ray mouseRay = SceneCamera.ScreenPointToRay(mousePosInScreenCoordinate);
+            RaycastHit hit;
+            if(GetComponent<Collider>().Raycast(mouseRay,out hit, Mathf.Infinity))
+            {
+                Debug.Log(hit);
+            }
+            else
+            {
+                Debug.Log("no clic");
+            }
+            //Debug.Log(gameObject.name);
         }
     }
 
