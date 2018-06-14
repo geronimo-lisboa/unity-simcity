@@ -1,4 +1,44 @@
 ﻿////https://catlikecoding.com/unity/tutorials/procedural-grid/
+////TODO lista:
+//SIMCITY
+//10) Fazer elevar
+//11) Fazer diminuir
+//12) Criar o morro gaussiano
+//13) Criar a meseta 
+//14) Criar a elevação linear
+//15) Criar a ravina
+//7) Situação inicial de um mapa é plana
+//8) Reativar o sea level
+//9) Criar a barra de sea level
+//8) Persistência do mapa
+//9) Lista dos mapas persistidos
+//10) Escolha de um mapa pra edição
+//11) Criação de um novo mapa
+//12) Deleção do mapa
+//13) Vários tipos de modificações,
+//14) O esquema de manter a intensidade inalterada se a posição do mouse estiver diferente não está bom pq aparentemente não está percebendo 100%
+//quando é pra manter.Talvez ter um timer pra verificar se houve mudança?
+//15) Fazer versão touch 
+//16) Testar no S7, no S8 e no ipad
+//17) Tiling: Ao invés de um unico mega-bloco, fazer um terreno maior usando vários blocos menores. Em nenhum momento eu preciso tocar
+//nos vértices, só preciso da origem do mapa e da posição no world space pra saber onde mudar. Logo, não há nenhum problema em picotar,
+//exceto nos casos em que uma operação de modificação afetar mais de um tile. Será preciso que a operação tenha algum conceito de raio
+//para eu controlar isso.
+//18) https://github.com/Whinarn/MeshDecimator pode ser util pois eu não estou usando os vértices. Se o decimator funcionar e minhas hipoteses
+//estiverem certas eu poderei avaliar se o trade-off de maior lentidão na edição do mapa compensa a redução do numero de vertices. Talvez compense,
+//quando o jogo estiver efetivamente sendo jogado ao invés de estar no editor de mapa.
+
+
+//FEITO
+//1) Ao clicar no botão, mudar o tipo de modificação, se é pra subir ou se é pra descer.
+//2) Ao clicar no terreno, invocar o modificador e o modificador delegar pro tipo de modificação
+//3) Armazenar a posição anterior do click
+//4) Se a posição se mantiver, aumentar a intensidade e passar essa intensidade pro tipo de modificação
+//5) Se a posição mudar, manter a intensidade constante
+//6) Se o click acabar, intensidade vai a zero
+//7)Conversão do click de world space pra image space
+//8)Modificação da imagem
+//9)Reconstrução do mapa
 
 using System.Collections;
 using System.Collections.Generic;
@@ -13,6 +53,10 @@ public class MyTerrain : MonoBehaviour {
     private float currentHeightMultiplier = 0;
     private float currentSeaLevel = 0;
     private float currentBeachWidth = 0;
+    /// <summary>
+    /// Se true vai forçar o terreno a se regerar, necessário pro editor de terreno.
+    /// </summary>
+    public bool IsDirty = false;
      /// <summary>
     /// O tamanho do lado, em quadradinhos
     /// </summary>
@@ -180,6 +224,7 @@ public class MyTerrain : MonoBehaviour {
         currentSize = Size;
         currentSeaLevel = SeaLevel;
         currentBeachWidth = BeachWidth;
+        IsDirty = false;
     }
     /// <summary>
     /// Retorna true se houve mudança no tamanho da malha, false caso contrário.
@@ -190,6 +235,6 @@ public class MyTerrain : MonoBehaviour {
         return (currentHeightMultiplier != HeightMultiplier ||
             currentSize!= Size ||
             currentSeaLevel != SeaLevel ||
-            currentBeachWidth != BeachWidth);
+            currentBeachWidth != BeachWidth || IsDirty);
     }
 }
