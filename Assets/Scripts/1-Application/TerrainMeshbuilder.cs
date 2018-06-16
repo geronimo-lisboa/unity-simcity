@@ -72,7 +72,7 @@ namespace application.terrainEditor
                 GetComponent<MeshFilter>().sharedMesh.RecalculateTangents();
                 GetComponent<MeshCollider>().sharedMesh = GetComponent<MeshFilter>().sharedMesh;
             }
-            if (!RunningOnEditorTest.IsRunningOnEditor())
+            else
             {
                 GenerateMesh();
                 SetSeaPlane();

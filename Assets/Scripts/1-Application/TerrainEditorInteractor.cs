@@ -45,8 +45,8 @@ namespace application.terrainEditor
 
         private void OnMouseDown()
         {
-            Vector3 mousePosInScreenCoordinate = Input.mousePosition;
-            oldEventPos = mousePosInScreenCoordinate;
+            //Vector3 mousePosInScreenCoordinate = Input.mousePosition;
+            //oldEventPos = mousePosInScreenCoordinate;
         }
 
         private void OnMouseDrag()
