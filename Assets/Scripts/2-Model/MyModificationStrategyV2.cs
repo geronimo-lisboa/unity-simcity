@@ -2,15 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MyModificationStrategyV2 : MonoBehaviour {
-
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+namespace model.terrain
+{ 
+    //TODO: Renomear p/ TerrainModificationStrategy
+    public class MyModificationStrategyV2 {
+        public enum ElevationChange { Raise, Lower };
+        public ElevationChange RaiseOrLower { get; private set; }
+        public MyModificationStrategyV2(ElevationChange raiseOrLower)
+        {
+            RaiseOrLower = raiseOrLower;
+        }
+    }
 }

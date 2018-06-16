@@ -3,14 +3,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[ExecuteInEditMode]
-[RequireComponent(typeof(MeshFilter), typeof(MeshRenderer), typeof(MeshCollider))]
-public class TerrainMeshbuilder : MonoBehaviour {
+
+namespace application.terrainEditor {
+    [ExecuteInEditMode]
+    [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer), typeof(MeshCollider))]
+    public class TerrainMeshbuilder : MonoBehaviour {
 
     /// <summary>
     /// O modelo do terreno
     /// </summary>
-    private MyTerrainV2 Terrain; //TODO: isso aqui está null, ainda não é incializado em lugar algum.
+    private MyTerrainV2 Terrain; 
     /// <summary>
     /// O plano do mar
     /// </summary>
@@ -123,4 +125,5 @@ public class TerrainMeshbuilder : MonoBehaviour {
     }
 
 
+}
 }
