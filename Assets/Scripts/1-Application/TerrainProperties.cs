@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using model.terrain;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -54,9 +55,21 @@ public class TerrainProperties : MonoBehaviour {
         currentBeachWidth = BeachWidth;
     }
 
+    private void UpdateTerrain()
+    {
+        if(HasChangedData())
+        {
+            MyTerrainV2.GetTerrain().BeachWidth = BeachWidth;
+            MyTerrainV2.GetTerrain().SeaLevel = SeaLevel;
+            MyTerrainV2.GetTerrain().ScaleFactor = HeightMultiplier;
+          //  MyTerrainV2.GetTerrain().BeachWidth = BeachWidth;
+
+        }
+    }
+
     private void Awake()
     {
-       
+        UpdateTerrain();
     }
     // Use this for initialization
     void Start () {
@@ -65,6 +78,7 @@ public class TerrainProperties : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
-	}
+        UpdateTerrain();
+
+    }
 }

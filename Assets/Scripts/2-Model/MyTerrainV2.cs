@@ -7,7 +7,16 @@ namespace model.terrain
     {
         private static MyTerrainV2 singleton = null;
 
-        public static MyTerrainV2 GetTerrain(Texture2D heightmap, float seaLevel, float beachWidth, float scaleFactor)
+        public static MyTerrainV2 GetTerrain()
+        {
+            if(singleton == null)
+            {
+                throw new System.InvalidOperationException();
+            }
+            return singleton;
+        }
+
+        public static MyTerrainV2 GetTerrainAndInitializeIfNeeded(Texture2D heightmap, float seaLevel, float beachWidth, float scaleFactor)
         {
             if(singleton == null)
             {
@@ -37,7 +46,15 @@ namespace model.terrain
         /// <summary>
         /// Nivel do mar, de 0 a 10
         /// </summary>
-        public float SeaLevel { get; set; }
+        public float SeaLevel {
+            get
+            { return _seaLevel; }
+            set
+            { _seaLevel = value;
+                Dirty = true;
+            }
+        }
+        private float _seaLevel;
         /// <summary>
         /// Espessura da praia (0 a 2)
         /// </summary>

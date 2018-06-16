@@ -40,7 +40,7 @@ public class TerrainMeshbuilder : MonoBehaviour {
     void Update () {
         if (Terrain == null)
         {
-            Terrain = MyTerrainV2.GetTerrain(
+            Terrain = MyTerrainV2.GetTerrainAndInitializeIfNeeded(
                 GetComponent<TerrainProperties>().Heightmap,
                 GetComponent<TerrainProperties>().SeaLevel,
                 GetComponent<TerrainProperties>().BeachWidth,

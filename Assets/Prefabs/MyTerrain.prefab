@@ -28,7 +28,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1301365766867612
 GameObject:
   m_ObjectHideFlags: 0
@@ -39,10 +39,10 @@ GameObject:
   - component: {fileID: 4884834556767522}
   - component: {fileID: 33056712324824096}
   - component: {fileID: 23177355227188784}
-  - component: {fileID: 114788439052707934}
   - component: {fileID: 64210174811711590}
-  - component: {fileID: 114126131143918954}
-  - component: {fileID: 114966036265286880}
+  - component: {fileID: 114974904530876758}
+  - component: {fileID: 114185674127192142}
+  - component: {fileID: 114520566745038880}
   m_Layer: 0
   m_Name: MyTerrain
   m_TagString: Untagged
@@ -57,7 +57,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1176786564770726}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.3050001, z: 0}
+  m_LocalPosition: {x: 0, y: 0.73, z: 0}
   m_LocalScale: {x: 1000, y: 1000, z: 1000}
   m_Children: []
   m_Father: {fileID: 4884834556767522}
@@ -189,7 +189,7 @@ MeshCollider:
   m_CookingOptions: 14
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 0}
---- !u!114 &114126131143918954
+--- !u!114 &114185674127192142
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -197,12 +197,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1301365766867612}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec2fd7ee99b2b1d4ea5ab23d625c79b2, type: 3}
+  m_Script: {fileID: 11500000, guid: 0f24b533f26c0ff46a27b905cc077c4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SceneCamera: {fileID: 0}
-  TestCursor: {fileID: 0}
---- !u!114 &114788439052707934
+  SeaPlane: {fileID: 1176786564770726}
+--- !u!114 &114520566745038880
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -210,25 +209,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 1301365766867612}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: deab5253593679f47aeb3049865c0d50, type: 3}
+  m_Script: {fileID: 11500000, guid: 96972fb4384ae034d808b90f3c799a98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114974904530876758
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1301365766867612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92b25c121c06ae548adec2cb554d7749, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Size: 99
-  HeightMultiplier: 30
+  HeightMultiplier: 46
+  SeaLevel: 0.86
+  BeachWidth: 0.26
   Heightmap: {fileID: 2800000, guid: 1584e341dd9dca64698ada206482c140, type: 3}
-  SeaLevel: 1.47
-  BeachWidth: 0.33
-  SeaPlane: {fileID: 1176786564770726}
---- !u!114 &114966036265286880
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1301365766867612}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 73291b3e09a075541b63dd5ab9da3621, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ButtonRaiseTerrain: {fileID: 0}
-  ButtonLowerTerrain: {fileID: 0}
