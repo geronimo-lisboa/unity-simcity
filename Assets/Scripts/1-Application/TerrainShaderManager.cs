@@ -5,10 +5,7 @@ using UnityEngine;
 [ExecuteInEditMode]
 [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer), typeof(MeshCollider))]
 public class TerrainShaderManager : MonoBehaviour {
-    [Range(0.0f, 10f)]
-    public float SeaLevel;
-    [Range(0.2f, 2.0f)]
-    public float BeachWidth;
+
     // Use this for initialization
     void Start () {
 		
@@ -24,13 +21,13 @@ public class TerrainShaderManager : MonoBehaviour {
     {
         if (!RunningOnEditorTest.IsRunningOnEditor())
         {
-            GetComponent<Renderer>().sharedMaterial.SetFloat("_SeaLevel", SeaLevel);
-            GetComponent<Renderer>().sharedMaterial.SetFloat("_BeachWidth", BeachWidth);
+            GetComponent<Renderer>().sharedMaterial.SetFloat("_SeaLevel", GetComponent<TerrainProperties>().SeaLevel);
+            GetComponent<Renderer>().sharedMaterial.SetFloat("_BeachWidth", GetComponent<TerrainProperties>().BeachWidth);
         }
         else
         {
-            GetComponent<Renderer>().material.SetFloat("_SeaLevel", SeaLevel);
-            GetComponent<Renderer>().material.SetFloat("_BeachWidth", BeachWidth);
+            GetComponent<Renderer>().material.SetFloat("_SeaLevel", GetComponent<TerrainProperties>().SeaLevel);
+            GetComponent<Renderer>().material.SetFloat("_BeachWidth", GetComponent<TerrainProperties>().BeachWidth);
         }
     }
 }
