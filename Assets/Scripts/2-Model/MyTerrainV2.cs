@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 namespace model.terrain
@@ -7,6 +8,11 @@ namespace model.terrain
     public class MyTerrainV2
     {
         private static MyTerrainV2 singleton = null;
+
+        public static bool IsInitalized()
+        {
+            return singleton != null;
+        }
 
         public static MyTerrainV2 GetTerrain()
         {
@@ -25,6 +31,17 @@ namespace model.terrain
             }
             return singleton;
         }
+
+        public Vector2 GetXZSpacing()
+        {
+            return spacing;
+        }
+
+        public Vector3 GetOrigin()
+        {
+            return origin;
+        }
+
         /// <summary>
         /// Se torna true se o heightmap for alterado. 
         /// </summary>
@@ -56,6 +73,8 @@ namespace model.terrain
             }
         }
         private float _seaLevel;
+
+
         /// <summary>
         /// Espessura da praia (0 a 2)
         /// </summary>
@@ -75,6 +94,9 @@ namespace model.terrain
             }
         }
         private float _scaleFactor;
+        private Vector3 origin = new Vector3(0,0,0);//Hardcoded mas um dia pode não ser.
+        private Vector2 spacing = new Vector2(1,1);//Hardcoded mas um dia pode deixar de ser.
+
         /// <summary>
         /// As altitudes como uma lista de floats, gerada a partir do heightmap
         /// </summary>

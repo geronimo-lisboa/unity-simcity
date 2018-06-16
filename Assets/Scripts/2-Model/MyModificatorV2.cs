@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 //TODO: Renomear esse arquivo, a cirurgia já foi concluída.
@@ -16,7 +17,7 @@ namespace model.terrain
             Intensity = 0;
         }
 
-        public void Modify()
+        public void Modify(Ray ray, RaycastHit hit)
         {
             if(currentStrategy==null)
             {
@@ -25,13 +26,23 @@ namespace model.terrain
             }
             else
             {
-                currentStrategy.Execute(terrain, Intensity);
+                currentStrategy.Execute(terrain, Intensity, hit.point);
             }
         }
 
         public void SetModificationStrategy(MyModificationStrategyV2 strat)
         {
             this.currentStrategy = strat;
+        }
+
+        public void IncreaseIntensity(float v)
+        {
+            Intensity += v;
+        }
+
+        public void ResetIntensity()
+        {
+            Intensity = 0;
         }
     }
 }

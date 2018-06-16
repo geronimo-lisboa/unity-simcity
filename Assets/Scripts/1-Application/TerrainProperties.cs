@@ -60,7 +60,7 @@ namespace application.terrainEditor
 
         private void UpdateTerrain()
         {
-            if (HasChangedData())
+            if (HasChangedData() && MyTerrainV2.IsInitalized())
             {
                 MyTerrainV2.GetTerrain().BeachWidth = BeachWidth;
                 MyTerrainV2.GetTerrain().SeaLevel = SeaLevel;

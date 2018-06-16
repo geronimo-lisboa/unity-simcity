@@ -15,7 +15,6 @@ namespace application.terrainEditor
         public GameObject TestCursor;
         private Modificator terrainModificator;
         private Vector3 oldEventPos;
-        private float currentIntensity = 0;
         
         private void InitModificator()
         {
@@ -31,21 +30,18 @@ namespace application.terrainEditor
             //Seta os delegates que vão tratar dos clicks
             ButtonLowerTerrain.onClick.AddListener(delegate
             {
-                terrainModificator.SetModificationStrategy(new SimpleTerrainModificationStrategy(MyModificationStrategyV2.ElevationChange.Lower));
+                terrainModificator.SetModificationStrategy(
+                    new SimpleTerrainModificationStrategy(MyModificationStrategyV2.ElevationChange.Lower)
+                    );
             });
             ButtonRaiseTerrain.onClick.AddListener(delegate
             {
-                terrainModificator.SetModificationStrategy(new SimpleTerrainModificationStrategy(MyModificationStrategyV2.ElevationChange.Raise));
+                terrainModificator.SetModificationStrategy(
+                    new SimpleTerrainModificationStrategy(MyModificationStrategyV2.ElevationChange.Raise)
+                    );
             });
         }
 
-        private float CalculateIntensity(Vector3 currentMousePosInSC)
-        {
-            if (currentMousePosInSC.Equals(oldEventPos))
-                return currentIntensity + 0.1f;
-            else
-                return currentIntensity;
-        }
 
         private void OnMouseDown()
         {
@@ -63,11 +59,11 @@ namespace application.terrainEditor
                 RaycastHit hit;
                 if (GetComponent<Collider>().Raycast(mouseRay, out hit, Mathf.Infinity))
                 {
-                    //TestCursor.transform.position = hit.point;
-                    currentIntensity = CalculateIntensity(hit.point);
-                    //TODO: Fazer a 1a invocação de uma estratégia, no objeto modificador, na camada do modelo.
-                    //if (currentModificationStrategy != null)
-                    //    currentModificationStrategy.Execute(hit.point, currentIntensity, GetComponent<MyTerrain>());
+                    if(oldEventPos.Equals(hit.point))
+                    {
+                        terrainModificator.IncreaseIntensity(0.1f);
+                    }
+                    terrainModificator.Modify(mouseRay, hit);
                     oldEventPos = hit.point;
                 }
             }
@@ -75,7 +71,7 @@ namespace application.terrainEditor
 
         private void OnMouseUp()
         {
-            currentIntensity = 0;
+            terrainModificator.ResetIntensity();
         }
         // Update is called once per frame
         void Update()
