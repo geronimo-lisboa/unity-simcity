@@ -7,10 +7,10 @@ namespace model.terrain
 {
     public class Modificator
     {
-        private MyTerrainV2 terrain;
-        private MyModificationStrategyV2 currentStrategy;
+        private MyTerrain terrain;
+        private TerrainModificationStrategy currentStrategy;
         public float Intensity { get; private set; }
-        public Modificator(MyTerrainV2 terrain)
+        public Modificator(MyTerrain terrain)
         {
             this.terrain = terrain;
             currentStrategy = null;
@@ -30,7 +30,7 @@ namespace model.terrain
             }
         }
 
-        public void SetModificationStrategy(MyModificationStrategyV2 strat)
+        public void SetModificationStrategy(TerrainModificationStrategy strat)
         {
             this.currentStrategy = strat;
         }

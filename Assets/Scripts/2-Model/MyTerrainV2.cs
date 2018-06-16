@@ -4,17 +4,16 @@ using System.Collections.Generic;
 using UnityEngine;
 namespace model.terrain
 {
-//TODO: Renomear pra MyTerrain
-    public class MyTerrainV2
+    public class MyTerrain
     {
-        private static MyTerrainV2 singleton = null;
+        private static MyTerrain singleton = null;
 
         public static bool IsInitalized()
         {
             return singleton != null;
         }
 
-        public static MyTerrainV2 GetTerrain()
+        public static MyTerrain GetTerrain()
         {
             if(singleton == null)
             {
@@ -23,11 +22,11 @@ namespace model.terrain
             return singleton;
         }
 
-        public static MyTerrainV2 GetTerrainAndInitializeIfNeeded(Texture2D heightmap, float seaLevel, float beachWidth, float scaleFactor)
+        public static MyTerrain GetTerrainAndInitializeIfNeeded(Texture2D heightmap, float seaLevel, float beachWidth, float scaleFactor)
         {
             if(singleton == null)
             {
-                singleton = new MyTerrainV2(heightmap, seaLevel, beachWidth, scaleFactor);
+                singleton = new MyTerrain(heightmap, seaLevel, beachWidth, scaleFactor);
             }
             return singleton;
         }
@@ -102,7 +101,7 @@ namespace model.terrain
         /// </summary>
         public List<float> Heights { get; private set; }
 
-        public MyTerrainV2(Texture2D heightmap, float seaLevel, float beachWidth, float scaleFactor)
+        public MyTerrain(Texture2D heightmap, float seaLevel, float beachWidth, float scaleFactor)
         {
             this.Heightmap = heightmap;
             this.SeaLevel = seaLevel;

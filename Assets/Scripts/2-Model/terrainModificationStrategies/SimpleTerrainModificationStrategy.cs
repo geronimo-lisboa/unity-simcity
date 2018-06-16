@@ -5,7 +5,7 @@ using UnityEngine;
 namespace model.terrain.terrainModificationStrategy
 {
 
-    public class SimpleTerrainModificationStrategy:MyModificationStrategyV2 
+    public class SimpleTerrainModificationStrategy:TerrainModificationStrategy 
     {
         public SimpleTerrainModificationStrategy(ElevationChange elevationChange)
             :base(elevationChange)
@@ -14,14 +14,9 @@ namespace model.terrain.terrainModificationStrategy
         }
 
 
-        public override void Execute(MyTerrainV2 terrain, float intensity, Vector3 pointInWC)
+        public override void Execute(MyTerrain terrain, float intensity, Vector3 pointInWC)
         {
-            Vector3 origin = terrain.GetOrigin();
-            Vector2 spacing = terrain.GetXZSpacing();
-            Vector3 _temp = pointInWC - origin;
-            _temp.x *= spacing.x;
-            _temp.z *= spacing.y;//(spacing é de 2 coordenadas (xz), com z sendo chamado de y pela classe Vector2.
-            int[] pointInImageCoordinate = new int[] { (int)_temp.x, (int)_temp.z };
+            int[] pointInImageCoordinate = WorldCoordinateToImageCoordinate(terrain, pointInWC);
             //Agora tenho a posição na imagem. Vou alterar o valor do pixel e atualizar o terreno
             Texture2D hm = terrain.Heightmap;//Necessário  criar essa variável local pra forçar o setter do Heightmap, que flaga como Dirty
             Color oldColor = hm.GetPixel(pointInImageCoordinate[0], pointInImageCoordinate[1]);

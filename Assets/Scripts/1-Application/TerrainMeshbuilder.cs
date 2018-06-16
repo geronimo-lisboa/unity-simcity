@@ -14,7 +14,7 @@ namespace application.terrainEditor
         /// <summary>
         /// O modelo do terreno
         /// </summary>
-        private MyTerrainV2 Terrain;
+        private MyTerrain Terrain;
         /// <summary>
         /// O plano do mar
         /// </summary>
@@ -46,7 +46,7 @@ namespace application.terrainEditor
         {
             if (Terrain == null)
             {
-                Terrain = MyTerrainV2.GetTerrainAndInitializeIfNeeded(
+                Terrain = MyTerrain.GetTerrainAndInitializeIfNeeded(
                     GetComponent<TerrainProperties>().Heightmap,
                     GetComponent<TerrainProperties>().SeaLevel,
                     GetComponent<TerrainProperties>().BeachWidth,

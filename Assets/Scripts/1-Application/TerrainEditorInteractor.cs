@@ -20,7 +20,7 @@ namespace application.terrainEditor
         {
             if(terrainModificator == null)
             {
-                MyTerrainV2 t = MyTerrainV2.GetTerrain();
+                MyTerrain t = MyTerrain.GetTerrain();
                 terrainModificator = new Modificator(t);
             }
         }
@@ -31,13 +31,13 @@ namespace application.terrainEditor
             ButtonLowerTerrain.onClick.AddListener(delegate
             {
                 terrainModificator.SetModificationStrategy(
-                    new SimpleTerrainModificationStrategy(MyModificationStrategyV2.ElevationChange.Lower)
+                    new SimpleTerrainModificationStrategy(TerrainModificationStrategy.ElevationChange.Lower)
                     );
             });
             ButtonRaiseTerrain.onClick.AddListener(delegate
             {
                 terrainModificator.SetModificationStrategy(
-                    new SimpleTerrainModificationStrategy(MyModificationStrategyV2.ElevationChange.Raise)
+                    new SimpleTerrainModificationStrategy(TerrainModificationStrategy.ElevationChange.Raise)
                     );
             });
         }
