@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,6 +12,10 @@ namespace model.terrain
         public MyModificationStrategyV2(ElevationChange raiseOrLower)
         {
             RaiseOrLower = raiseOrLower;
+        }
+        public void Execute(MyTerrainV2 terrain, float intensity)
+        {
+            throw new NotImplementedException();
         }
     }
 }

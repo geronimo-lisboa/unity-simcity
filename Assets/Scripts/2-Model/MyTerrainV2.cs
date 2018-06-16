@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 namespace model.terrain
 {
+//TODO: Renomear pra MyTerrain
     public class MyTerrainV2
     {
         private static MyTerrainV2 singleton = null;

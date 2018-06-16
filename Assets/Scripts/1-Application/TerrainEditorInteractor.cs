@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using model.terrain;
 using UnityEngine.UI;
+using model.terrain.terrainModificationStrategy;
 
 namespace application.terrainEditor
 {
@@ -12,23 +13,29 @@ namespace application.terrainEditor
         public Button ButtonLowerTerrain;
         public Camera SceneCamera;
         public GameObject TestCursor;
-
+        private Modificator terrainModificator;
         private Vector3 oldEventPos;
         private float currentIntensity = 0;
-        private MyModificationStrategyV2 currentModificationStrategy = null;
+        
+        private void InitModificator()
+        {
+            if(terrainModificator == null)
+            {
+                MyTerrainV2 t = MyTerrainV2.GetTerrain();
+                terrainModificator = new Modificator(t);
+            }
+        }
         // Use this for initialization
         void Start()
         {
             //Seta os delegates que vão tratar dos clicks
             ButtonLowerTerrain.onClick.AddListener(delegate
             {
-                //TODO: Criar uma primeira estratégia 
-                currentModificationStrategy = null;//new ModificationSimple(TipoDeModificacao.ElevationChange.Lower);
+                terrainModificator.SetModificationStrategy(new SimpleTerrainModificationStrategy(MyModificationStrategyV2.ElevationChange.Lower));
             });
             ButtonRaiseTerrain.onClick.AddListener(delegate
             {
-                //TODO: Criar uma primeira estratégia 
-                currentModificationStrategy = null;//new ModificationSimple(TipoDeModificacao.ElevationChange.Lower);
+                terrainModificator.SetModificationStrategy(new SimpleTerrainModificationStrategy(MyModificationStrategyV2.ElevationChange.Raise));
             });
         }
 
@@ -73,7 +80,7 @@ namespace application.terrainEditor
         // Update is called once per frame
         void Update()
         {
-
+            InitModificator();
         }
     }
 
