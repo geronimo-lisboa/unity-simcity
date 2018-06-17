@@ -62,7 +62,7 @@ namespace application.terrainEditor
                 {
                     if(oldEventPos.Equals(hit.point))
                     {
-                        terrainModificator.IncreaseIntensity(0.1f);
+                        terrainModificator.IncreaseIntensity(0.2f);
                     }
                     terrainModificator.Modify(mouseRay, hit);
                     oldEventPos = hit.point;

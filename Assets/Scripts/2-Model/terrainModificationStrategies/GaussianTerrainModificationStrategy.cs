@@ -54,51 +54,43 @@ namespace model.terrain.terrainModificationStrategy
 
             return H;
         }
-        int fileCount = 0;
+        
         //        https://en.wikipedia.org/wiki/Gaussian_function
         //        Olhar a sessão de gaussiano 2d
         public override void Execute(MyTerrain terrain, float intensity, Vector3 pointInWC)
         {
-            Debug.Log("Intensity = " + intensity);
             int[] pointInImageCoordinate = WorldCoordinateToImageCoordinate(terrain, pointInWC);
             //pointInImageCoordinate é o centro da função gaussiana
-            float[,] gaussianMask = new float[terrain.Heightmap.width, terrain.Heightmap.height];//Onde vou guardar os valores do gaussiano. 
-            //Esses valores serão somados aos valores da imagem
-            for (int i = 0, z = 0; z < terrain.Heightmap.height; z++)
+            List<float> gaussianMaskPoints = new List<float>();
+            int width = terrain.Heightmap.width;//Assumo quadrado
+            float sigmaX = intensity * 10.0f;
+            float sigmaY = intensity * 10.0f;
+            float A = intensity / 50;
+            Texture2D tex = terrain.Heightmap;
+            for (int x=0; x<width; x++)
             {
-                for (int x = 0; x < terrain.Heightmap.width; x++, i++)
+                for(int z=0; z<width; z++)
                 {
-                    //TODO: Usar o gaussiano
-                    int[] p = new int[] { x, z };
-                    float v = EvaluateGaussian(pointInImageCoordinate, p, intensity*20, intensity*20, intensity/100);
-                    gaussianMask[z, x] = v;
+                    int[] p = new int[] {x,z };
+                    float v = EvaluateGaussian(pointInImageCoordinate, p, sigmaX, sigmaY, A);
+                    Color oldColor = terrain.Heightmap.GetPixel(x, z);
+                    Color valueToAdd = new Color(v, v, v);
+                    Color newColor;
+                    if(this.RaiseOrLower==ElevationChange.Lower)
+                    {
+                        newColor = oldColor - valueToAdd;
+                    }
+                    else
+                    {
+                        newColor = oldColor + valueToAdd;
+                    }
+                    tex.SetPixel(x, z, newColor);
                 }
             }
-            //SaveTextureToFile(CreateTexture(gaussianMask), "/debug/gaussian"+(++fileCount)+".png");
-            Texture2D hm = terrain.Heightmap;
-            //TODO: Somar a imagem do guassiano à imagem do heightmap
-            for (int i = 0, z = 0; z < terrain.Heightmap.height; z++)
-            {
-                for (int x = 0; x < terrain.Heightmap.width; x++, i++)
-                {
-                    try
-                    {
-                        Color c = new Color(gaussianMask[z, x], gaussianMask[z, x], gaussianMask[z, x]);
-                        Color oldColor = hm.GetPixel(z, x);
-                        c = oldColor + c;
-                        hm.SetPixel(z, x, c);
-                    }
-                    catch(IndexOutOfRangeException ex)
-                    {
-                        Debug.LogWarning("Exceção: x=" + x + " z=" + z);
-                        throw ex;
-                    }
-
-                }
-            }
-            //TODO: Atualizar o dado no terreno
-            terrain.Heightmap = hm;
-
+            tex.Apply();
+            terrain.Heightmap = tex;
+            SaveTextureToFile(tex, "/Debug/debug" + (++ct) + ".png");
         }
+        int ct = 0;
     }
 }

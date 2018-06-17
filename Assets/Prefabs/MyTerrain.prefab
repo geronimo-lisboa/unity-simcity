@@ -43,6 +43,7 @@ GameObject:
   - component: {fileID: 114974904530876758}
   - component: {fileID: 114185674127192142}
   - component: {fileID: 114520566745038880}
+  - component: {fileID: 114580961843996128}
   m_Layer: 0
   m_Name: MyTerrain
   m_TagString: Untagged
@@ -57,7 +58,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1176786564770726}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.73, z: 0}
+  m_LocalPosition: {x: 0, y: 2.93, z: 0}
   m_LocalScale: {x: 1000, y: 1000, z: 1000}
   m_Children: []
   m_Father: {fileID: 4884834556767522}
@@ -212,6 +213,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96972fb4384ae034d808b90f3c799a98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114580961843996128
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1301365766867612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f065c641c5dd9694593b35551acb3347, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ButtonRaiseTerrain: {fileID: 0}
+  ButtonLowerTerrain: {fileID: 0}
+  SceneCamera: {fileID: 0}
+  TestCursor: {fileID: 0}
 --- !u!114 &114974904530876758
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -224,7 +240,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Size: 99
-  HeightMultiplier: 46
-  SeaLevel: 0.86
-  BeachWidth: 0.26
+  HeightMultiplier: 20
+  SeaLevel: 3.03
+  BeachWidth: 0.2
   Heightmap: {fileID: 2800000, guid: 1584e341dd9dca64698ada206482c140, type: 3}
