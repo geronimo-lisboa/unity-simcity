@@ -70,11 +70,11 @@ namespace model.terrain.terrainModificationStrategy
                 {
                     //TODO: Usar o gaussiano
                     int[] p = new int[] { x, z };
-                    float v = EvaluateGaussian(pointInImageCoordinate, p, intensity/2, intensity*2, intensity*2);
+                    float v = EvaluateGaussian(pointInImageCoordinate, p, intensity*20, intensity*20, intensity/100);
                     gaussianMask[z, x] = v;
                 }
             }
-            SaveTextureToFile(CreateTexture(gaussianMask), "gaussian"+(++fileCount)+".png");
+            //SaveTextureToFile(CreateTexture(gaussianMask), "/debug/gaussian"+(++fileCount)+".png");
             Texture2D hm = terrain.Heightmap;
             //TODO: Somar a imagem do guassiano à imagem do heightmap
             for (int i = 0, z = 0; z < terrain.Heightmap.height; z++)
