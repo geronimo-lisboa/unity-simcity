@@ -30,8 +30,11 @@ namespace application.terrainEditor
             }
             else
             {
-                GetComponent<Renderer>().material.SetFloat("_SeaLevel", GetComponent<TerrainProperties>().SeaLevel);
-                GetComponent<Renderer>().material.SetFloat("_BeachWidth", GetComponent<TerrainProperties>().BeachWidth);
+                GetComponent<Renderer>().sharedMaterial.SetFloat("_SeaLevel", GetComponent<TerrainProperties>().SeaLevel);
+                GetComponent<Renderer>().sharedMaterial.SetFloat("_BeachWidth", GetComponent<TerrainProperties>().BeachWidth);
+
+                //GetComponent<Renderer>().material.SetFloat("_SeaLevel", GetComponent<TerrainProperties>().SeaLevel);
+                //GetComponent<Renderer>().material.SetFloat("_BeachWidth", GetComponent<TerrainProperties>().BeachWidth);
             }
         }
     }

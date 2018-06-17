@@ -31,13 +31,14 @@ namespace application.terrainEditor
             ButtonLowerTerrain.onClick.AddListener(delegate
             {
                 terrainModificator.SetModificationStrategy(
-                    new SimpleTerrainModificationStrategy(TerrainModificationStrategy.ElevationChange.Lower)
+                    new GaussianTerrainModificationStrategy(TerrainModificationStrategy.ElevationChange.Lower)
+                    //new SimpleTerrainModificationStrategy(TerrainModificationStrategy.ElevationChange.Lower)
                     );
             });
             ButtonRaiseTerrain.onClick.AddListener(delegate
             {
                 terrainModificator.SetModificationStrategy(
-                    new SimpleTerrainModificationStrategy(TerrainModificationStrategy.ElevationChange.Raise)
+                   new GaussianTerrainModificationStrategy(TerrainModificationStrategy.ElevationChange.Raise)
                     );
             });
         }

@@ -80,11 +80,17 @@ namespace application.terrainEditor
                 GetComponent<TerrainProperties>().UpdateChangeTesters();
                 Vector3[] meshVertices = RunningOnEditorTest.IsRunningOnEditor() ? GetComponent<MeshFilter>().sharedMesh.vertices : GetComponent<MeshFilter>().mesh.vertices;
                 // update the vertices in the mesh and update its properties
-                GetComponent<MeshFilter>().mesh.vertices = meshVertices;
-                GetComponent<MeshFilter>().mesh.RecalculateBounds();
-                GetComponent<MeshFilter>().mesh.RecalculateNormals();
-                GetComponent<MeshFilter>().mesh.RecalculateTangents();
-                GetComponent<MeshCollider>().sharedMesh = GetComponent<MeshFilter>().mesh;
+                GetComponent<MeshFilter>().sharedMesh.vertices = meshVertices;
+                GetComponent<MeshFilter>().sharedMesh.RecalculateBounds();
+                GetComponent<MeshFilter>().sharedMesh.RecalculateNormals();
+                GetComponent<MeshFilter>().sharedMesh.RecalculateTangents();
+                GetComponent<MeshCollider>().sharedMesh = GetComponent<MeshFilter>().sharedMesh;
+
+                //GetComponent<MeshFilter>().mesh.vertices = meshVertices;
+                //GetComponent<MeshFilter>().mesh.RecalculateBounds();
+                //GetComponent<MeshFilter>().mesh.RecalculateNormals();
+                //GetComponent<MeshFilter>().mesh.RecalculateTangents();
+                //GetComponent<MeshCollider>().sharedMesh = GetComponent<MeshFilter>().sharedMesh;
             }
 
         }
