@@ -63,6 +63,8 @@ namespace model.terrain.terrainModificationStrategy
             //pointInImageCoordinate é o centro da função gaussiana
             List<float> gaussianMaskPoints = new List<float>();
             int width = terrain.Heightmap.width;//Assumo quadrado
+            if (intensity == 0)
+                intensity = 0.001f;
             float sigmaX = intensity * 10.0f;
             float sigmaY = intensity * 10.0f;
             float A = intensity / 50;
@@ -89,7 +91,7 @@ namespace model.terrain.terrainModificationStrategy
             }
             tex.Apply();
             terrain.Heightmap = tex;
-            SaveTextureToFile(tex, "/Debug/debug" + (++ct) + ".png");
+            //SaveTextureToFile(tex, "/Debug/debug" + (++ct) + ".png");
         }
         int ct = 0;
     }
