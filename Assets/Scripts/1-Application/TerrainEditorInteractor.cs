@@ -27,20 +27,20 @@ namespace application.terrainEditor
         // Use this for initialization
         void Start()
         {
-            //Seta os delegates que vão tratar dos clicks
-            ButtonLowerTerrain.onClick.AddListener(delegate
-            {
-                terrainModificator.SetModificationStrategy(
-                    new GaussianTerrainModificationStrategy(TerrainModificationStrategy.ElevationChange.Lower)
-                    //new SimpleTerrainModificationStrategy(TerrainModificationStrategy.ElevationChange.Lower)
-                    );
-            });
-            ButtonRaiseTerrain.onClick.AddListener(delegate
-            {
-                terrainModificator.SetModificationStrategy(
-                   new GaussianTerrainModificationStrategy(TerrainModificationStrategy.ElevationChange.Raise)
-                    );
-            });
+            ////Seta os delegates que vão tratar dos clicks
+            //ButtonLowerTerrain.onClick.AddListener(delegate
+            //{
+            //    terrainModificator.SetModificationStrategy(
+            //        new GaussianTerrainModificationStrategy(TerrainModificationStrategy.ElevationChange.Lower)
+            //        //new SimpleTerrainModificationStrategy(TerrainModificationStrategy.ElevationChange.Lower)
+            //        );
+            //});
+            //ButtonRaiseTerrain.onClick.AddListener(delegate
+            //{
+            //    terrainModificator.SetModificationStrategy(
+            //       new GaussianTerrainModificationStrategy(TerrainModificationStrategy.ElevationChange.Raise)
+            //        );
+            //});
         }
 
 
