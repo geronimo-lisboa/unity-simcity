@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-//TODO: Renomear esse arquivo, a cirurgia já foi concluída.
+
 namespace model.terrain
 {
     public class Modificator
