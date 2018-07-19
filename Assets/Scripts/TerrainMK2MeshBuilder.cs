@@ -4,6 +4,9 @@ using UnityEngine;
 //https://catlikecoding.com/unity/tutorials/procedural-grid/
 [ExecuteInEditMode]
 [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer), typeof(MeshCollider))]
+//TODO: Fazer o plano ser ao longo de xz e não de xy
+//TODO: Pivot ficar no centro
+//TODO: Voltar a usar o terrain
 public class TerrainMK2MeshBuilder : MonoBehaviour {
     private TerrainMK2 terrain;
     private Mesh mesh;
@@ -15,19 +18,11 @@ public class TerrainMK2MeshBuilder : MonoBehaviour {
         }
         set {
             terrain = value;
-            GenerateIfNotNull();
+
         }
     }
 
-    private void GenerateIfNotNull()
-    {   
-        //TODO: voltar a usar o terrain
-        //if (terrain != null)
-        if(true)
-        {
-            GenerateMesh();
-        }
-    }
+
 
     private void GenerateMesh()
     {
@@ -44,7 +39,6 @@ public class TerrainMK2MeshBuilder : MonoBehaviour {
 
     private void OnDrawGizmos()
     {
-        //Gizmos.DrawCube(new Vector3(0, 0, 0), new Vector3(10, 10, 10));
         if(vertices==null)
         {
             return;
@@ -62,20 +56,20 @@ public class TerrainMK2MeshBuilder : MonoBehaviour {
     }
 
     void Start () {
-        GenerateIfNotNull();
+        GenerateMesh();
     }
 
-    public void Awake()
+    protected virtual void Awake()
     {
         Debug.Log("TerrainMK2MeshBuilder.Awake()");
-        GenerateIfNotNull();
+        GenerateMesh();
     }
 
     void Update ()
     {
-        Debug.Log("TerrainMK2MeshBuilder.Update()");
-        GenerateIfNotNull();
+        GenerateMesh();
     }
+
 
     public int debugXSize;
     public int debugYSize;
