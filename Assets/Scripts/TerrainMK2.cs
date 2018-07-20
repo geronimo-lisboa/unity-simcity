@@ -4,23 +4,27 @@ using System.Linq;
 
 public class TerrainMK2{
     private List<float> heightMap;
-    public int Size { get; private set; }
+
+    public int X { get; set; }
+    public int Y { get; set; }
 
     public List<float> HeightMap
     {
         get { return heightMap; }
     }
 
-    public TerrainMK2(int size)
+    public TerrainMK2(int X, int Y)
     {
-        Size = size;
-        heightMap = ResetHeights(size, size);
+        this.X = X;
+        this.Y = Y;
+
+        heightMap = ResetHeights(X, Y);
     }
 
     private List<float> ResetHeights(int w, int h)
     {
         List<float> hm = new List<float>();
-        hm.AddRange(Enumerable.Repeat(0.0f, Size*Size));
+        hm.AddRange(Enumerable.Repeat(0.0f, X*Y));
         return hm;
     }
 }

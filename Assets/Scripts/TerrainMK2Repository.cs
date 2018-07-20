@@ -7,7 +7,7 @@ public class TerrainMK2Repository
     public TerrainMK2 FindById(int v)
     {
         //TODO: Passar isso pra classe mock
-        TerrainMK2 mockTerrain = new TerrainMK2(2);
+        TerrainMK2 mockTerrain = new TerrainMK2(3,2);
         return mockTerrain;
     }
 }

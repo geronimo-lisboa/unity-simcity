@@ -21,12 +21,13 @@ public class TerrainMK2MeshBuilder : MonoBehaviour {
 
         }
     }
-
-
-
+    
     private void GenerateMesh()
     {
-        vertices = new Vector3[( (debugXSize + 1) * (debugYSize + 1) )];
+        GetComponent<MeshFilter>().mesh = mesh = new Mesh();
+        mesh.name = "Procedural Grid";
+
+        vertices = new Vector3[(debugXSize + 1) * (debugYSize + 1)];
         for (int i = 0, y = 0; y <= debugYSize; y++)
         {
             for (int x = 0; x <= debugXSize; x++, i++)
@@ -34,7 +35,20 @@ public class TerrainMK2MeshBuilder : MonoBehaviour {
                 vertices[i] = new Vector3(x, y);
             }
         }
+        mesh.vertices = vertices;
 
+        int[] triangles = new int[debugXSize * debugYSize * 6];
+        for (int ti = 0, vi = 0, y = 0; y < debugYSize; y++, vi++)
+        {
+            for (int x = 0; x < debugXSize; x++, ti += 6, vi++)
+            {
+                triangles[ti] = vi;
+                triangles[ti + 3] = triangles[ti + 2] = vi + 1;
+                triangles[ti + 4] = triangles[ti + 1] = vi + debugXSize + 1;
+                triangles[ti + 5] = vi + debugXSize + 2;
+            }
+        }
+        mesh.triangles = triangles;
     }
 
     private void OnDrawGizmos()
