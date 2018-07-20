@@ -4,8 +4,7 @@ using UnityEngine;
 //https://catlikecoding.com/unity/tutorials/procedural-grid/
 [ExecuteInEditMode]
 [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer), typeof(MeshCollider))]
-//TODO: Pivot ficar no centro
-//TODO: Voltar a usar o terrain
+
 public class TerrainMK2MeshBuilder : MonoBehaviour {
     private TerrainMK2 terrain;
     private Mesh mesh;
