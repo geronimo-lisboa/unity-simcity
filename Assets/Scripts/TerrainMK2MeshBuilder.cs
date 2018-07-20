@@ -4,7 +4,6 @@ using UnityEngine;
 //https://catlikecoding.com/unity/tutorials/procedural-grid/
 [ExecuteInEditMode]
 [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer), typeof(MeshCollider))]
-//TODO: Fazer o plano ser ao longo de xz e não de xy
 //TODO: Pivot ficar no centro
 //TODO: Voltar a usar o terrain
 public class TerrainMK2MeshBuilder : MonoBehaviour {
@@ -28,13 +27,14 @@ public class TerrainMK2MeshBuilder : MonoBehaviour {
             return;
         GetComponent<MeshFilter>().mesh = mesh = new Mesh();
         mesh.name = "Procedural Grid";
-
+        float putInCenterX = terrain.X / 2;
+        float putInCenterY = terrain.Y / 2;
         vertices = new Vector3[(terrain.X + 1) * (terrain.Y + 1)];
         for (int i = 0, y = 0; y <= terrain.Y; y++)
         {
             for (int x = 0; x <= terrain.X; x++, i++)
             {
-                vertices[i] = new Vector3(x, y);
+                vertices[i] = new Vector3(x - putInCenterX, 0, y - putInCenterY);
             }
         }
         mesh.vertices = vertices;
@@ -60,9 +60,10 @@ public class TerrainMK2MeshBuilder : MonoBehaviour {
             return;
         }
         Gizmos.color = Color.black;
+        
         for(int i=0; i<vertices.Length; i++)
         {
-            Gizmos.DrawSphere(vertices[i], debugGizmoRadius);
+            Gizmos.DrawSphere(vertices[i]+ GetComponent<Transform>().position, debugGizmoRadius);
         }
     }
 
