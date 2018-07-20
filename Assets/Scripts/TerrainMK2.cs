@@ -24,7 +24,7 @@ public class TerrainMK2{
     private List<float> ResetHeights(int w, int h)
     {
         List<float> hm = new List<float>();
-        hm.AddRange(Enumerable.Repeat(0.0f, X*Y));
+        hm.AddRange(Enumerable.Repeat(0.0f, (X+1)*(Y+1)));
         return hm;
     }
 }

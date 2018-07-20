@@ -4,7 +4,7 @@ using UnityEngine;
 //https://catlikecoding.com/unity/tutorials/procedural-grid/
 [ExecuteInEditMode]
 [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer), typeof(MeshCollider))]
-
+//TODO: Shader de terreno
 public class TerrainMK2MeshBuilder : MonoBehaviour {
     private TerrainMK2 terrain;
     private Mesh mesh;
@@ -33,7 +33,9 @@ public class TerrainMK2MeshBuilder : MonoBehaviour {
         {
             for (int x = 0; x <= terrain.X; x++, i++)
             {
-                vertices[i] = new Vector3(x - putInCenterX, 0, y - putInCenterY);
+                vertices[i] = new Vector3(x - putInCenterX, terrain.HeightMap[i], y - putInCenterY);
+                //TODO: uv mapping
+                //TODO: tangent
             }
         }
         mesh.vertices = vertices;
@@ -50,6 +52,7 @@ public class TerrainMK2MeshBuilder : MonoBehaviour {
             }
         }
         mesh.triangles = triangles;
+        //TODO: calculo da normal
     }
 
     private void OnDrawGizmos()

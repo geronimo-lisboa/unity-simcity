@@ -1,5 +1,4 @@
 FAZER
-3)Implementar a 1a função de alteração
 4)Implementar salvar o terreno
 5)Quando abrir carregar o terreno salvo
 6)Criar o dashboard de terrenos.
@@ -15,10 +14,9 @@ FAZER
 16)Pendurar os terrenos no usuário
 
 FAZENDO
-
+3)Implementar a 1a função de alteração
 
 FEITO
-
 3)Criar o MeshBuilder 
 2)Usar o conceito de terreno retangular
 1)Quando entrar na tela, carregar o terreno mock pro editor 
