@@ -9,6 +9,8 @@ public class TerrainMK2MeshBuilder : MonoBehaviour {
     private TerrainMK2 terrain;
     private Mesh mesh;
     private Vector3[] vertices;
+    public GameObject testCursor;
+    public Camera SceneCamera;
 
     public TerrainMK2 MyTerrain {
         get {
@@ -19,7 +21,22 @@ public class TerrainMK2MeshBuilder : MonoBehaviour {
 
         }
     }
-    
+
+    private void OnMouseDrag()
+    {
+        if (Input.GetMouseButton(0))
+        {
+            Vector3 mousePosInScreenCoordinate = Input.mousePosition;
+
+            Ray mouseRay = SceneCamera.ScreenPointToRay(mousePosInScreenCoordinate);
+            RaycastHit hit;
+            if (GetComponent<Collider>().Raycast(mouseRay, out hit, Mathf.Infinity))
+            {
+                testCursor.GetComponent<Transform>().position = hit.point;
+            }
+        }
+    }
+
     private void GenerateMesh()
     {
         if(terrain==null)
@@ -56,7 +73,10 @@ public class TerrainMK2MeshBuilder : MonoBehaviour {
         }
         mesh.triangles = triangles;
         mesh.RecalculateNormals();
+        GetComponent<MeshFilter>().sharedMesh.RecalculateBounds();
         mesh.tangents = tangents;
+
+        GetComponent<MeshCollider>().sharedMesh = GetComponent<MeshFilter>().sharedMesh;
     }
 
     private void OnDrawGizmos()

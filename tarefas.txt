@@ -12,6 +12,7 @@ FAZER
 14)Implementar thumbnail na tela do editor
 15)Criar o conceito de usuário - ver https://firebase.google.com/docs/auth/unity/start?hl=pt-br
 16)Pendurar os terrenos no usuário
+17)Otimizar a geração do terreno para só criar se tiver sido modificado.
 
 FAZENDO
 3)Implementar a 1a função de alteração
