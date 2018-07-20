@@ -1,0 +1,26 @@
+FAZER
+3)Implementar a 1a função de alteração
+4)Implementar salvar o terreno
+5)Quando abrir carregar o terreno salvo
+6)Criar o dashboard de terrenos.
+7)Criar a operação de criar um novo terreno
+8)Criar a opeção de escolher um terreno pra alteração
+9)Criar a operação de exclusão de terreno
+10)Implementar novos pincéis de terreno
+11)Implementar sea level
+12)Implementar tiling
+13)Implementar rios
+14)Implementar thumbnail na tela do editor
+15)Criar o conceito de usuário - ver https://firebase.google.com/docs/auth/unity/start?hl=pt-br
+16)Pendurar os terrenos no usuário
+
+FAZENDO
+
+
+FEITO
+
+3)Criar o MeshBuilder 
+2)Usar o conceito de terreno retangular
+1)Quando entrar na tela, carregar o terreno mock pro editor 
+4)Garantir que o objeto de terreno esteja disponivel tanto em tempo de execução quanto em tempo de desenvolvimento, pra ve-lo
+na unity.

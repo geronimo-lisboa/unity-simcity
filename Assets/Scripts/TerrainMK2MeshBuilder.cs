@@ -24,28 +24,30 @@ public class TerrainMK2MeshBuilder : MonoBehaviour {
     
     private void GenerateMesh()
     {
+        if(terrain==null)
+            return;
         GetComponent<MeshFilter>().mesh = mesh = new Mesh();
         mesh.name = "Procedural Grid";
 
-        vertices = new Vector3[(debugXSize + 1) * (debugYSize + 1)];
-        for (int i = 0, y = 0; y <= debugYSize; y++)
+        vertices = new Vector3[(terrain.X + 1) * (terrain.Y + 1)];
+        for (int i = 0, y = 0; y <= terrain.Y; y++)
         {
-            for (int x = 0; x <= debugXSize; x++, i++)
+            for (int x = 0; x <= terrain.X; x++, i++)
             {
                 vertices[i] = new Vector3(x, y);
             }
         }
         mesh.vertices = vertices;
 
-        int[] triangles = new int[debugXSize * debugYSize * 6];
-        for (int ti = 0, vi = 0, y = 0; y < debugYSize; y++, vi++)
+        int[] triangles = new int[terrain.X * terrain.Y * 6];
+        for (int ti = 0, vi = 0, y = 0; y < terrain.Y; y++, vi++)
         {
-            for (int x = 0; x < debugXSize; x++, ti += 6, vi++)
+            for (int x = 0; x < terrain.X; x++, ti += 6, vi++)
             {
                 triangles[ti] = vi;
                 triangles[ti + 3] = triangles[ti + 2] = vi + 1;
-                triangles[ti + 4] = triangles[ti + 1] = vi + debugXSize + 1;
-                triangles[ti + 5] = vi + debugXSize + 2;
+                triangles[ti + 4] = triangles[ti + 1] = vi + terrain.X + 1;
+                triangles[ti + 5] = vi + terrain.X + 2;
             }
         }
         mesh.triangles = triangles;
