@@ -29,13 +29,16 @@ public class TerrainMK2MeshBuilder : MonoBehaviour {
         float putInCenterX = terrain.X / 2;
         float putInCenterY = terrain.Y / 2;
         vertices = new Vector3[(terrain.X + 1) * (terrain.Y + 1)];
+        Vector2[] uv = new Vector2[vertices.Length];
+        Vector4[] tangents = new Vector4[vertices.Length];
+        Vector4 tangent = new Vector4(1f, 0f, 0f, -1f);
         for (int i = 0, y = 0; y <= terrain.Y; y++)
         {
             for (int x = 0; x <= terrain.X; x++, i++)
             {
                 vertices[i] = new Vector3(x - putInCenterX, terrain.HeightMap[i], y - putInCenterY);
-                //TODO: uv mapping
-                //TODO: tangent
+                uv[i] = new Vector2(x / terrain.X, y / terrain.Y);
+                tangents[i] = tangent;
             }
         }
         mesh.vertices = vertices;
@@ -52,7 +55,8 @@ public class TerrainMK2MeshBuilder : MonoBehaviour {
             }
         }
         mesh.triangles = triangles;
-        //TODO: calculo da normal
+        mesh.RecalculateNormals();
+        mesh.tangents = tangents;
     }
 
     private void OnDrawGizmos()
