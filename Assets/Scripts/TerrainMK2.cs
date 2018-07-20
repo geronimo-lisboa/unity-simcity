@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -26,5 +27,13 @@ public class TerrainMK2{
         List<float> hm = new List<float>();
         hm.AddRange(Enumerable.Repeat(0.0f, (X+1)*(Y+1)));
         return hm;
+    }
+
+    internal void Add(float[] modificationMap)
+    {
+        for(int i=0; i<modificationMap.Count(); i++)
+        {
+            heightMap[i] += modificationMap[i];
+        }
     }
 }
