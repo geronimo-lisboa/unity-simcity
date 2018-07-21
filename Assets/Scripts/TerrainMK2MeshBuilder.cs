@@ -29,8 +29,8 @@ public class TerrainMK2MeshBuilder : MonoBehaviour {
             return;
         GetComponent<MeshFilter>().mesh = mesh = new Mesh();
         mesh.name = "Procedural Grid";
-        float putInCenterX = terrain.X / 2;
-        float putInCenterY = terrain.Y / 2;
+        float putInCenterX = 0;//terrain.X / 2;
+        float putInCenterY = 0;//terrain.Y / 2;
         vertices = new Vector3[(terrain.X + 1) * (terrain.Y + 1)];
         Vector2[] uv = new Vector2[vertices.Length];
         Vector4[] tangents = new Vector4[vertices.Length];
