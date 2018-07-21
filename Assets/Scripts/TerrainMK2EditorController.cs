@@ -24,8 +24,7 @@ public class TerrainMK2EditorController : MonoBehaviour {
             if (GetComponent<Collider>().Raycast(mouseRay, out hit, Mathf.Infinity))
             {
                 testCursor.GetComponent<Transform>().position = hit.point;
-
-                terrainService.GaussianElevation(terrain, TerrainMK2Service.ElevationChange.Raise, new Vector3(mX, 0, mY), 10.0f);
+                terrainService.GaussianElevation(terrain, TerrainMK2Service.ElevationChange.Raise, hit.point, 10.0f);
             }
         }
     }

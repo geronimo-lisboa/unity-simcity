@@ -11,7 +11,7 @@ public class TerrainMK2Service
     {
         float[] modificationMap = new float[terrain.HeightMap.Count];
         int pX = (int)(center.x);
-        int pY = (int)(center.z * (terrain.X + 1));
+        int pY = (int)(center.z) * (terrain.X + 1);
         int modIndex = pX + pY;
         modificationMap[modIndex] = 0.1f;
         terrain.Add(modificationMap);
