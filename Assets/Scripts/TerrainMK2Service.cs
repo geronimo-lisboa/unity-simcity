@@ -14,9 +14,16 @@ public class TerrainMK2Service
         Vector3 locationInTerrainSpace = center - origin;
         Debug.Log("******* " + locationInTerrainSpace + " *********");
         //Cria a imagem gaussiana
-        float[] modificationMap = new float[terrain.X * terrain.Y];
-        int modificationIndex =(int) Math.Round(locationInTerrainSpace.x + locationInTerrainSpace.y * terrain.Y);
-        modificationMap[modificationIndex] = 0.01f;
+        float[] modificationMap = new float[terrain.HeightMap.Count];
+        int modificationIndex =(int) Math.Round(0.0f + 0 * (terrain.X+1));
+        modificationMap[modificationIndex] = 0.1f;
+
+        modificationIndex = (int)Math.Round(0.0f + 20 * (terrain.X+1));
+        modificationMap[modificationIndex] = 0.05f;
+
+        modificationIndex = (int)Math.Round(20F + 0 * (terrain.X+1));
+        modificationMap[modificationIndex] = 0.025f;
+
         //Aplica a imagem gaussiana no terreno
         terrain.Add(modificationMap);
         //Atualiza os dados do terreno
