@@ -15,7 +15,7 @@ FAZER
 17)Otimizar a geração do terreno para só criar se tiver sido modificado.
 
 FAZENDO
-3)Implementar a 1a função de alteração
+
 
 FEITO
 3)Criar o MeshBuilder 
@@ -23,3 +23,4 @@ FEITO
 1)Quando entrar na tela, carregar o terreno mock pro editor 
 4)Garantir que o objeto de terreno esteja disponivel tanto em tempo de execução quanto em tempo de desenvolvimento, pra ve-lo
 na unity.
+3)Implementar a 1a função de alteração

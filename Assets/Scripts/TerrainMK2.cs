@@ -2,23 +2,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-
+[Serializable]
 public class TerrainMK2{
+    
+
     private List<float> heightMap;
 
     public int X { get; set; }
     public int Y { get; set; }
-
+    public string Id { get; private set; }
     public List<float> HeightMap
     {
         get { return heightMap; }
     }
 
-    public TerrainMK2(int X, int Y)
+    public TerrainMK2(int X, int Y, String id)
     {
         this.X = X;
         this.Y = Y;
-
+        this.Id = id;
         heightMap = ResetHeights(X, Y);
     }
 

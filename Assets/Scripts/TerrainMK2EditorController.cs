@@ -13,6 +13,13 @@ public class TerrainMK2EditorController : MonoBehaviour {
     public float mX, mY;
     public GameObject testCursor;
     public Camera SceneCamera;
+
+    public void OnSalvarClick()
+    {
+        terrain = terrainService.SaveTerrain(terrain);
+    }
+
+
     private void OnMouseDrag()
     {
         if (Input.GetMouseButton(0))
