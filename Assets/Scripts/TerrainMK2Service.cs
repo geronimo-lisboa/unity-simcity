@@ -30,4 +30,10 @@ public class TerrainMK2Service
         TerrainMK2Repository repo = new TerrainMK2Repository();
         return repo.FindById(v);
     }
+
+    internal TerrainMK2 NewMockTerrain()
+    {
+        TerrainMK2Repository repo = new TerrainMK2Repository();
+        return repo.NewMockTerrain();
+    }
 }

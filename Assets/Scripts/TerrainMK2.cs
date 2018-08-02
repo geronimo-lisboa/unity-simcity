@@ -14,6 +14,9 @@ public class TerrainMK2{
     public List<float> HeightMap
     {
         get { return heightMap; }
+        set {
+            heightMap = value;
+        }
     }
 
     public TerrainMK2(int X, int Y, String id)
@@ -21,6 +24,11 @@ public class TerrainMK2{
         this.X = X;
         this.Y = Y;
         this.Id = id;
+        //heightMap = ResetHeights(X, Y);
+    }
+
+    public void ResetHeights()
+    {
         heightMap = ResetHeights(X, Y);
     }
 
@@ -31,7 +39,7 @@ public class TerrainMK2{
         return hm;
     }
 
-    internal void Add(float[] modificationMap)
+    public void Add(float[] modificationMap)
     {
         for(int i=0; i<modificationMap.Count(); i++)
         {

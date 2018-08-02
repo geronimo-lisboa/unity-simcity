@@ -17,9 +17,10 @@ public class TerrainMK2Repository
           .Select(s => s[random.Next(s.Length)]).ToArray());
     }
 
-    public TerrainMK2 NewTerrain()
+    public TerrainMK2 NewMockTerrain()
     {
-        TerrainMK2 mockTerrain = new TerrainMK2(20, 20, RandomString(20));
+        TerrainMK2 mockTerrain = new TerrainMK2(5, 5, RandomString(20));
+        mockTerrain.ResetHeights();
         return mockTerrain;
     }
 
@@ -30,7 +31,7 @@ public class TerrainMK2Repository
     public TerrainMK2 FindById(String id)
     {
         //carrega
-        String fileData = System.IO.File.ReadAllText("./Assets/Terrains/"+id+".json");
+        String fileData = System.IO.File.ReadAllText("./"+id+".json");
         //deserializa
         var deserializedTerrain = JsonConvert.DeserializeObject<TerrainMK2>(fileData);
         //retorna
@@ -43,7 +44,7 @@ public class TerrainMK2Repository
         //string json = UnityEngine.JsonUtility.ToJson(terrain);
         //salva no disco
         var json = JsonConvert.SerializeObject(terrain);
-        System.IO.File.WriteAllText("./Assets/Terrains/"+terrain.Id+".json", json);
+        System.IO.File.WriteAllText("./"+terrain.Id+".json", json);
         return terrain;
     }
 }
