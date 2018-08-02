@@ -17,15 +17,24 @@ public class TerrainMK2Repository
           .Select(s => s[random.Next(s.Length)]).ToArray());
     }
 
+    public TerrainMK2 NewTerrain()
+    {
+        TerrainMK2 mockTerrain = new TerrainMK2(20, 20, RandomString(20));
+        return mockTerrain;
+    }
 
     //TODO: Mudar isso aqui pra receber string pra buscar o terreno por id
     //TODO: Os terrenos vem da lista de arquivos em /Assets/Terrains
     //TODO: Verificar se essa listagem de arquivos vai funcionar no celular.
     //TODO: Estudar SqlLite na Unity.
-    public TerrainMK2 FindById(int v)
+    public TerrainMK2 FindById(String id)
     {
-        TerrainMK2 mockTerrain = new TerrainMK2(20,20, RandomString(20));
-        return mockTerrain;
+        //carrega
+        String fileData = System.IO.File.ReadAllText("./Assets/Terrains/"+id+".json");
+        //deserializa
+        var deserializedTerrain = JsonConvert.DeserializeObject<TerrainMK2>(fileData);
+        //retorna
+        return deserializedTerrain;
     }
 
     //Install-Package Unity.Newtonsoft.Json -Version 7.0.0

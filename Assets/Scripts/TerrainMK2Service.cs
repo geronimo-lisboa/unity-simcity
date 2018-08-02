@@ -24,7 +24,7 @@ public class TerrainMK2Service
         return repo.Save(terrain);
     }
 
-    public TerrainMK2 GetById(int v)
+    public TerrainMK2 GetById(String v)
     {
         //TODO: Isso aqui deveria ser injetado.
         TerrainMK2Repository repo = new TerrainMK2Repository();

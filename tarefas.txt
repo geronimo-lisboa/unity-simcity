@@ -1,6 +1,4 @@
 FAZER
-4)Implementar salvar o terreno
-5)Quando abrir carregar o terreno salvo
 6)Criar o dashboard de terrenos.
 7)Criar a operação de criar um novo terreno
 8)Criar a opeção de escolher um terreno pra alteração
@@ -15,7 +13,8 @@ FAZER
 17)Otimizar a geração do terreno para só criar se tiver sido modificado.
 
 FAZENDO
-
+6)Implementar salvar o terreno
+7)Quando abrir carregar o terreno salvo
 
 FEITO
 3)Criar o MeshBuilder 
@@ -23,4 +22,4 @@ FEITO
 1)Quando entrar na tela, carregar o terreno mock pro editor 
 4)Garantir que o objeto de terreno esteja disponivel tanto em tempo de execução quanto em tempo de desenvolvimento, pra ve-lo
 na unity.
-3)Implementar a 1a função de alteração
+5)Implementar a 1a função de alteração

@@ -40,12 +40,16 @@ public class TerrainMK2EditorController : MonoBehaviour {
         //TODO: Isso aqui deveria ser injetado
         terrainService = new TerrainMK2Service();
         //TODO: Isso deve ser determinado pelo dashboard de terreno, que ainda será criado.
-        terrain = terrainService.GetById(0);
+        Debug.Assert(false, "quebrado");
+        //terrain = terrainService.GetById(0);
     }
 	
 	void Start () {
         if (terrain == null)
-            terrain = terrainService.GetById(0);
+        {
+            Debug.Assert(false, "quebrado");
+            //terrain = terrainService.GetById(0);
+        }   
         var meshBuilder = GetComponent<TerrainMK2MeshBuilder>();
         meshBuilder.MyTerrain = terrain;
     }
@@ -53,14 +57,20 @@ public class TerrainMK2EditorController : MonoBehaviour {
     protected void Awake()
     {
         if (terrain == null)
-            terrain = terrainService.GetById(0);
+        {
+            Debug.Assert(false, "quebrado");
+            //terrain = terrainService.GetById(0);
+        }   
         var meshBuilder = GetComponent<TerrainMK2MeshBuilder>();
         meshBuilder.MyTerrain = terrain;
     }
     
     void Update () {
         if (terrain == null)
-            terrain = terrainService.GetById(0);
+        {
+            Debug.Assert(false, "quebrado");
+            //terrain = terrainService.GetById(0);
+        }   
         var meshBuilder = GetComponent<TerrainMK2MeshBuilder>();
         meshBuilder.MyTerrain = terrain;
     }
