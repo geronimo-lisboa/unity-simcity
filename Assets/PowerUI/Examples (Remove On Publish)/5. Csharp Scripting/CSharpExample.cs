@@ -53,8 +53,7 @@ public class CSharpExample : MonoBehaviour {
 		var allButtons=document.body.getElementsByClassName("button");
 		
 		foreach(var element in allButtons){
-			
-			// This also shows how to create an "anonymous delegate". 
+   			// This also shows how to create an "anonymous delegate". 
 			// That's one not declared as a seperate function.
 			// These are more useful if you have a significant amount of callbacks:
 			element.onmousedown = delegate(MouseEvent mouseEvent) {

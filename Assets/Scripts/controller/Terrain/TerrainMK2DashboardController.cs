@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using PowerUI;
 
 public class TerrainMK2DashboardController : MonoBehaviour {
 
@@ -39,8 +40,26 @@ public class TerrainMK2DashboardController : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-		
-	}
+        // Get a reference to the main UI document so everything else looks wonderfully familiar:
+        var document = UI.document;
+        var btnTestOpen = document.getElementById("btnTestOpen");
+        
+        btnTestOpen.onmousedown = delegate (MouseEvent mouseEvent)
+        {
+            Debug.Log("FOO");
+        };
+        var btnOpenEditor = document.getElementById("btnOpenEditor");
+        btnOpenEditor.onmousedown = delegate (MouseEvent mouseEvent)
+        {
+            Debug.Log("BAR");
+        };
+        var btnResetEverything = document.getElementById("btnResetEverything");
+        btnResetEverything.onmousedown = delegate (MouseEvent mouseEvent)
+        {
+            Debug.Log("WOO");
+        };
+
+    }
 	
 	// Update is called once per frame
 	void Update () {
