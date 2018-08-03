@@ -22,10 +22,12 @@ public class TerrainMK2MeshBuilder : MonoBehaviour {
     }
 
 
-
+    int meshBuilderCount = 0;
     private void GenerateMesh()
     {
-        if(terrain==null)
+        Debug.Log("Rodando MeshBuilder n="+meshBuilderCount);
+        meshBuilderCount++;
+        if (terrain==null)
             return;
         GetComponent<MeshFilter>().mesh = mesh = new Mesh();
         mesh.name = "Procedural Grid";

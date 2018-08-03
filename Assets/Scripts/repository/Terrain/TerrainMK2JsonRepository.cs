@@ -28,7 +28,7 @@ public class TerrainMK2JsonRepository : IRepository<TerrainMK2, String>
     public TerrainMK2 CreateNew()
     {
         InitializePlayerPrefIfNeeded();
-        TerrainMK2 newTerrain = new TerrainMK2(10, 10, Guid.NewGuid().ToString());
+        TerrainMK2 newTerrain = new TerrainMK2(100, 100, Guid.NewGuid().ToString());
         newTerrain.ResetHeights();
         return newTerrain;
     }
