@@ -20,7 +20,7 @@ public class TerrainMK2Service
         int pX = (int)(center.x);
         int pY = (int)(center.z) * (terrain.X + 1);
         int modIndex = pX + pY;
-        modificationMap[modIndex] = 0.1f;
+        modificationMap[modIndex] = 1.5f;
         terrain.Add(modificationMap);
     }
 

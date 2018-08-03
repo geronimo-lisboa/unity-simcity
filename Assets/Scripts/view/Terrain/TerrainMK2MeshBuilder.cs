@@ -20,10 +20,12 @@ public class TerrainMK2MeshBuilder : MonoBehaviour {
 
         }
     }
-
-
+    public void UpdateCollider()
+    {
+        GetComponent<MeshCollider>().sharedMesh = GetComponent<MeshFilter>().mesh;//Isso aqui está muito lento.
+    }
     int meshBuilderCount = 0;
-    private void GenerateMesh()
+    public void GenerateMesh()
     {
         Debug.Log("Rodando MeshBuilder n="+meshBuilderCount);
         meshBuilderCount++;
@@ -64,7 +66,8 @@ public class TerrainMK2MeshBuilder : MonoBehaviour {
         GetComponent<MeshFilter>().sharedMesh.RecalculateBounds();
         mesh.tangents = tangents;
 
-        GetComponent<MeshCollider>().sharedMesh = GetComponent<MeshFilter>().sharedMesh;
+        
+       
     }
 
     private void OnDrawGizmos()
@@ -88,6 +91,7 @@ public class TerrainMK2MeshBuilder : MonoBehaviour {
 
     void Start () {
         GenerateMesh();
+        UpdateCollider();
     }
 
     protected virtual void Awake()
@@ -98,7 +102,7 @@ public class TerrainMK2MeshBuilder : MonoBehaviour {
 
     void Update ()
     {
-        GenerateMesh();
+        //GenerateMesh();
     }
 
 

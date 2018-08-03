@@ -34,8 +34,14 @@ public class TerrainMK2EditorController : MonoBehaviour {
             {
                 testCursor.GetComponent<Transform>().position = hit.point;
                 terrainService.GaussianElevation(terrain, TerrainMK2Service.ElevationChange.Raise, hit.point, 10.0f);
+                GetComponent<TerrainMK2MeshBuilder>().GenerateMesh();
             }
         }
+    }
+    
+    private void OnMouseUp()
+    {
+        GetComponent<TerrainMK2MeshBuilder>().UpdateCollider();
     }
 
     public TerrainMK2EditorController(){
