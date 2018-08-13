@@ -38,4 +38,10 @@ public class TerrainMK2Service
     {
         return repo.CreateNew();
     }
+
+    public List<TerrainMK2>  GetAll()
+    {
+        return repo.GetAll();
+        
+    }
 }

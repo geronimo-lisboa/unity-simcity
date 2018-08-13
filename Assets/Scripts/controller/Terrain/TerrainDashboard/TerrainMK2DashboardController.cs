@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 using PowerUI;
 
 public class TerrainMK2DashboardController : MonoBehaviour {
+    
+
 
     public string idTerrenoTeste;
 
@@ -38,26 +40,44 @@ public class TerrainMK2DashboardController : MonoBehaviour {
         PlayerPrefs.DeleteAll();
     }
 
+    public void OnTesteWidgetClick()
+    {
+        Debug.Log("clicou");
+    }
+
+    private Dom.Element divModalNovoTerreno;
+
     // Use this for initialization
     void Start () {
-        // Get a reference to the main UI document so everything else looks wonderfully familiar:
-        var document = UI.document;
-        var btnTestOpen = document.getElementById("btnTestOpen");
-        
-        btnTestOpen.onmousedown = delegate (MouseEvent mouseEvent)
-        {
-            Debug.Log("FOO");
-        };
-        var btnOpenEditor = document.getElementById("btnOpenEditor");
-        btnOpenEditor.onmousedown = delegate (MouseEvent mouseEvent)
-        {
-            Debug.Log("BAR");
-        };
-        var btnResetEverything = document.getElementById("btnResetEverything");
-        btnResetEverything.onmousedown = delegate (MouseEvent mouseEvent)
-        {
-            Debug.Log("WOO");
-        };
+        //Pega a lista de terrenos
+        TerrainMK2Service terrainService = new TerrainMK2Service();
+        List<TerrainMK2> terrainlist = terrainService.GetAll();
+        //cria as linhas de terreno.
+
+        //var document = UI.document;
+        //var btnTestWidget = document.getElementById("btnTesteWidget");
+        //btnTestWidget.onmousedown = delegate (MouseEvent mouseEvent)
+        //{
+        //    OnTesteWidgetClick();
+        //};
+
+        //var btnTestOpen = document.getElementById("btnTestOpen");        
+        //btnTestOpen.onmousedown = delegate (MouseEvent mouseEvent)
+        //{
+        //    OnTesteAbrirClick();
+        //};
+
+        //var btnOpenEditor = document.getElementById("btnOpenEditor");
+        //btnOpenEditor.onmousedown = delegate (MouseEvent mouseEvent)
+        //{
+        //    OnTesteNovoClick();
+        //};
+
+        //var btnResetEverything = document.getElementById("btnResetEverything");
+        //btnResetEverything.onmousedown = delegate (MouseEvent mouseEvent)
+        //{
+        //    ResetDataClick();
+        //};
 
     }
 	

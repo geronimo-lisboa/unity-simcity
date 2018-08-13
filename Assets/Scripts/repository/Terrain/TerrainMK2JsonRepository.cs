@@ -110,4 +110,11 @@ public class TerrainMK2JsonRepository : IRepository<TerrainMK2, String>
         TerrainList lst = JsonConvert.DeserializeObject<TerrainList>(str);
         return lst;
     }
+
+    public List<TerrainMK2> GetAll()
+    {
+        InitializePlayerPrefIfNeeded();
+        TerrainList terrains = GetList();
+        return terrains.Terrains;
+    }
 }

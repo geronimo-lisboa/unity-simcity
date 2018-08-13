@@ -8,4 +8,5 @@ public interface IRepository<Entity, Key> {
     Entity Save(Entity e);
     IEnumerable<Entity> FindAll();
     void Delete(Entity e);
+    List<TerrainMK2> GetAll();
 }
